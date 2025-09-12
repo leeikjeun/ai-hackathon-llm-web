@@ -226,8 +226,8 @@ export default function App() {
                         ["거래건수(PAY)", result.features.pay_count],
                         ["PAY 최소/중앙값/최대", `${result.features.pay_min} / ${result.features.pay_median} / ${result.features.pay_max}`],
                         ["야간거래건수", result.features.night_pay_count],
-                        ["개설→첫거래(시간)", result.features.first_tx_delta_hours],
-                        ["개설→폐쇄(시간)", result.features.open_to_close_hours],
+                        ["개설→첫거래(시간)", result.features.first_tx_delta_hours ? `${Math.floor(result.features.first_tx_delta_hours)}시간 ${Math.floor((result.features.first_tx_delta_hours % 1) * 60)}분` : "N/A"],
+                        ["개설→폐쇄(시간)", result.features.open_to_close_hours ? `${Math.floor(result.features.open_to_close_hours)}시간 ${Math.floor((result.features.open_to_close_hours % 1) * 60)}분` : "N/A"],
                         ["KPay 메모 존재", String(result.features.has_kppay_memo)],
                       ].map(([k, v]) => (
                         <div key={String(k)} className="flex justify-between gap-4 bg-gray-50 p-2 rounded">
