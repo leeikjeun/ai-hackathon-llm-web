@@ -229,7 +229,6 @@ export default function App() {
                         ["개설→첫거래(시간)", result.features.first_tx_delta_hours],
                         ["개설→폐쇄(시간)", result.features.open_to_close_hours],
                         ["KPay 메모 존재", String(result.features.has_kppay_memo)],
-                        ["최상위 수취인 마스킹", result.features.top_benef_mask],
                       ].map(([k, v]) => (
                         <div key={String(k)} className="flex justify-between gap-4 bg-gray-50 p-2 rounded">
                           <span className="text-gray-600">{String(k)}</span>
@@ -375,7 +374,18 @@ export default function App() {
 
               {/* 안전망: 원본 JSON */}
               <details className="mt-4">
-                <summary className="cursor-pointer text-sm text-gray-600">원본 JSON 보기</summary>
+                <summary className="cursor-pointer text-sm text-gray-600 flex items-center justify-between">
+                  <span>원본 JSON 보기</span>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigator.clipboard.writeText(JSON.stringify(result, null, 2));
+                    }}
+                    className="ml-2 px-2 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded border text-black"
+                  >
+                    복사
+                  </button>
+                </summary>
                 <pre className="mt-2 bg-gray-100 p-3 rounded text-xs overflow-x-auto max-h-24 overflow-y-auto">{JSON.stringify(result, null, 2)}</pre>
               </details>
             </div>
