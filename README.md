@@ -1,12 +1,103 @@
-# React + Vite
+# 의심거래 분석 뷰 (AI Hackathon LLM Web)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+의심거래 분석 결과를 조회하고 시각화하는 React + Vite 웹 애플리케이션입니다.
 
-Currently, two official plugins are available:
+## 🎯 프로젝트 개요
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+이 프로젝트는 고객명을 입력하여 의심거래 분석 결과를 조회하는 웹 인터페이스를 제공합니다. 백엔드 FastAPI 서버와 연동하여 실시간으로 분석 결과를 받아와 사용자에게 직관적으로 표시합니다.
 
-## Expanding the ESLint configuration
+## ✨ 주요 기능
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **고객 선택**: 드롭다운에서 고객을 선택하여 분석 실행
+- **LLM 모델 선택**: ollama 또는 gpt5 모델 선택 가능
+- **캐시 사용**: 분석 결과 캐싱 옵션 제공
+- **종합 분석 결과 표시**:
+  - 고객 기본 정보
+  - 거래 내역 테이블
+  - 특성 요약 (입출금, 패스스루 비율, 거래 패턴 등)
+  - 탐지 결과 (증거 및 스코어)
+  - 보고서 초안 (리스크 스코어, 관련 법조항, 요약 문장)
+  - 라우팅 정보
+
+## 🛠 기술 스택
+
+- **Frontend**: React 19.1.1 + Vite 7.1.2
+- **Styling**: Tailwind CSS 4.1.12
+- **Linting**: ESLint 9.33.0
+- **Build Tool**: Vite
+
+## 🚀 실행 방법
+
+### 1. 의존성 설치
+```bash
+npm install
+```
+
+### 2. 개발 서버 실행
+```bash
+npm run dev
+```
+개발 서버가 실행되면 `http://localhost:5173`에서 애플리케이션에 접근할 수 있습니다.
+
+### 3. 빌드
+```bash
+npm run build
+```
+프로덕션용 빌드 파일이 `dist` 폴더에 생성됩니다.
+
+### 4. 린트 검사
+```bash
+npm run lint
+```
+
+## 🔌 백엔드 연동
+
+이 애플리케이션은 `http://localhost:8000`에서 실행되는 FastAPI 백엔드 서버와 연동됩니다.
+
+### API 엔드포인트
+
+- **GET /customers**: 고객 리스트 조회
+- **POST /run**: 의심거래 분석 실행
+  - 요청 바디: `{ customer_name, llm_model, use_cache }`
+
+## 📁 프로젝트 구조
+
+```
+src/
+├── App.jsx          # 메인 애플리케이션 컴포넌트
+├── main.jsx         # 애플리케이션 진입점
+├── App.css          # 애플리케이션 스타일
+└── index.css        # 글로벌 스타일
+```
+
+## 🎨 UI 특징
+
+- **반응형 디자인**: 모바일과 데스크톱 모두 지원
+- **모던한 UI**: Tailwind CSS를 활용한 깔끔한 디자인
+- **직관적인 인터페이스**: 섹션별로 구분된 분석 결과 표시
+- **실시간 피드백**: 로딩 상태 및 오류 메시지 표시
+
+## 📋 사용법
+
+1. 애플리케이션 실행 후 고객 드롭다운에서 분석할 고객 선택
+2. LLM 모델 선택 (ollama 또는 gpt5)
+3. 캐시 사용 여부 설정
+4. "조회하기" 버튼 클릭하여 분석 실행
+5. 결과를 섹션별로 확인:
+   - 고객 정보
+   - 거래 내역
+   - 특성 요약
+   - 탐지 결과
+   - 보고서 초안
+
+## 🔧 개발 정보
+
+- **React + Vite**: 빠른 개발 환경과 HMR 지원
+- **ESLint**: 코드 품질 관리
+- **Tailwind CSS**: 유틸리티 기반 스타일링
+
+## 📝 참고사항
+
+- 백엔드 서버가 실행 중이어야 모든 기능을 사용할 수 있습니다
+- 분석 결과는 JSON 형태로도 확인 가능합니다
+- 원본 JSON 데이터는 하단의 "원본 JSON 보기" 섹션에서 확인할 수 있습니다
